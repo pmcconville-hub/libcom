@@ -42,6 +42,7 @@ We have built the [image composition workbench](https://libcom.ustcnewly.com/) b
 <img src="https://raw.githubusercontent.com/bcmi/libcom/main/resources/online_workbench.jpg" width="1000" />
 </div>
 
+[![]](https://github.com/user-attachments/assets/87416ec5-2461-42cb-9f2d-5030b1e1b5ec)
 
 ## Main Functions
 
@@ -92,6 +93,7 @@ If you use our toolbox, please cite our survey paper using the following BibTeX 
   year={2021}
 }
 ```
+
 
 
 
