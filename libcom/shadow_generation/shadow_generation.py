@@ -56,7 +56,7 @@ class TestDataset(Dataset):
                 raise ValueError(f"Image not found: {img_input}")
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         elif isinstance(img_input, np.ndarray):
-            img = img_input
+            img = cv2.cvtColor(img_input, cv2.COLOR_BGR2RGB)
         else:
             raise TypeError("shadowfree_img must be str or np.ndarray")
         img = cv2.resize(img, (512, 512))
