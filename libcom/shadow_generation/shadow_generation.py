@@ -720,10 +720,32 @@ class ShadowGenerationModel:
                     decoded = decoded.cpu().permute(0,2,3,1).numpy()
                     decoded = (decoded*255).astype(np.uint8)[0]
 
-                    shadowfree_img_cv = cv2.imread(shadowfree_img)
-                    shadowfree_img_cv = cv2.cvtColor(shadowfree_img_cv, cv2.COLOR_BGR2RGB)
-                    object_mask_cv = cv2.imread(object_mask, cv2.IMREAD_GRAYSCALE)
+                    # shadowfree_img_cv = cv2.imread(shadowfree_img)
+                    # shadowfree_img_cv = cv2.cvtColor(shadowfree_img_cv, cv2.COLOR_BGR2RGB)
+                    # object_mask_cv = cv2.imread(object_mask, cv2.IMREAD_GRAYSCALE)
 
+                    if isinstance(shadowfree_img, str):
+                        shadowfree_img_cv = cv2.imread(shadowfree_img)
+                        if shadowfree_img_cv is None:
+                            raise ValueError(f"Image not found: {shadowfree_img}")
+                        shadowfree_img_cv = cv2.cvtColor(shadowfree_img_cv, cv2.COLOR_BGR2RGB)
+                    elif isinstance(shadowfree_img, np.ndarray):
+                        shadowfree_img_cv = cv2.cvtColor(shadowfree_img, cv2.COLOR_BGR2RGB)
+                    else:
+                        raise TypeError(f"shadowfree_img must be str or np.ndarray, got {type(shadowfree_img)}")
+
+                    # 处理 object_mask
+                    if isinstance(object_mask, str):
+                        object_mask_cv = cv2.imread(object_mask, cv2.IMREAD_GRAYSCALE)
+                        if object_mask_cv is None:
+                            raise ValueError(f"Mask not found: {object_mask}")
+                    elif isinstance(object_mask, np.ndarray):
+                        object_mask_cv = object_mask  
+                    else:
+                        raise TypeError(f"object_mask must be str or np.ndarray, got {type(object_mask)}")
+
+
+                    
                     decoded_post = self.post_process(decoded, shadowfree_img_cv, object_mask_cv)
                     decoded_post = cv2.cvtColor(decoded_post, cv2.COLOR_RGB2BGR)
 
