@@ -20,7 +20,7 @@ except ImportError:
     print("PyTorch is not installed. Installing PyTorch first...")
     install_package("torch")
     import torch
-    from torch.utils.cpp_extension import BuildExtension, CUDAExtension, CppExtension:
+    from torch.utils.cpp_extension import BuildExtension, CUDAExtension, CppExtension
 
 def readme():
     with open('README.md', encoding='utf-8') as f:
